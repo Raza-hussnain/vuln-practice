@@ -1,6 +1,7 @@
+// Fixed SQL Injection Example
 const userInput = req.query.id;
-const query = "SELECT * FROM users WHERE id = " + userInput; // ❌ Vulnerable
-db.query(query, function(err, result) {
+const query = "SELECT * FROM users WHERE id = ?";
+db.query(query, [userInput], function(err, result) { // ✅ Safe
   if (err) throw err;
   console.log(result);
 });
